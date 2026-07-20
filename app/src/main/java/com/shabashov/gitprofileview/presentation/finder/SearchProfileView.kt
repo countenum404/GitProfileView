@@ -30,6 +30,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.shabashov.gitprofileview.domain.Profile
+import com.shabashov.gitprofileview.presentation.ui.theme.JetBrainsFontFamily
 
 @Preview
 @Composable
@@ -93,7 +95,10 @@ fun SearchField(
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(8.dp),
         placeholder = {
-            Text("Type to search a profiles")
+            Text(
+                "Type to search a profiles",
+                fontFamily = JetBrainsFontFamily,
+            )
         },
         singleLine = true,
         onValueChange = onValueChange,
@@ -138,12 +143,14 @@ fun ProfileCard(
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
                 maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
+                fontFamily = JetBrainsFontFamily,
             )
             Text(
                 text = "${profile.fullName}",
                 maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
+                fontFamily = JetBrainsFontFamily,
             )
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
@@ -153,7 +160,8 @@ fun ProfileCard(
                 Text(
                     text = "Followers: ${profile.followersNumber}",
                     maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
+                    fontFamily = JetBrainsFontFamily,
                 )
             }
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -164,7 +172,8 @@ fun ProfileCard(
                 Text(
                     text = "Following: ${profile.followingNumber}",
                     maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
+                    fontFamily = JetBrainsFontFamily,
                 )
             }
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -175,7 +184,8 @@ fun ProfileCard(
                 Text(
                     text = "Repositories: ${profile.publicRepositories}",
                     maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
+                    fontFamily = JetBrainsFontFamily,
                 )
             }
 
@@ -193,6 +203,7 @@ private fun SubTitle(
         text = text,
         color = MaterialTheme.colorScheme.onSurfaceVariant,
         fontWeight = FontWeight.Bold,
+        fontFamily = JetBrainsFontFamily,
         fontSize = 14.sp
     )
 }
