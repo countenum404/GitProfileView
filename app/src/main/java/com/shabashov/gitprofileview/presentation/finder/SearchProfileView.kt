@@ -1,6 +1,10 @@
 package com.shabashov.gitprofileview.presentation.finder
 
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -46,6 +50,12 @@ fun SearchProfileView(
     modifier: Modifier = Modifier.fillMaxSize(),
     viewModel: SearchProfileViewModel = viewModel()
 ) {
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        Log.d("SearchProfileView", result.resultCode.toString())
+    }
+
     val state by viewModel.state.collectAsState()
 
     Column(modifier = modifier) {
@@ -72,7 +82,11 @@ fun SearchProfileView(
                 item {
                     ProfileCard(
                         modifier = Modifier.padding(start = 8.dp, end = 8.dp),
-                        profile = it
+                        profile = it,
+                        onClick = {
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/${it.name}"))
+                            launcher.launch(intent)
+                        }
                     )
                 }
                 item {
@@ -121,7 +135,8 @@ fun SearchField(
 @Composable
 fun ProfileCard(
     modifier: Modifier = Modifier,
-    profile: Profile
+    profile: Profile,
+    onClick: () -> Unit
 ) {
     Box(
         modifier = modifier
@@ -132,6 +147,7 @@ fun ProfileCard(
                 color = MaterialTheme.colorScheme.tertiary
             )
             .background(color = MaterialTheme.colorScheme.surface)
+            .clickable(onClick = onClick)
     ) {
         Column(
             modifier = Modifier.padding(
