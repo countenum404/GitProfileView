@@ -184,7 +184,7 @@ fun ProfileCard(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
                     imageVector = Icons.Default.AccountBox,
-                    contentDescription = "repositories"
+                    contentDescription = "following number"
                 )
                 Text(
                     text = "Following: ${profile.followingNumber}",
