@@ -2,12 +2,14 @@ package com.shabashov.gitprofileview.presentation.finder
 
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shabashov.gitprofileview.data.TestRepository
 import com.shabashov.gitprofileview.domain.Profile
 import com.shabashov.gitprofileview.domain.SearchProfileUseCase
+import com.shabashov.gitprofileview.domain.ShowRepositoryInBrowserUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
@@ -19,6 +21,8 @@ import kotlinx.coroutines.launch
 class SearchProfileViewModel : ViewModel() {
     private val repository = TestRepository
     private val searchProfileUseCase = SearchProfileUseCase()
+    private val showRepositoryInBrowserUseCase = ShowRepositoryInBrowserUseCase()
+
     private val _state = MutableStateFlow<SearchProfileState>(
         SearchProfileState("")
     )
@@ -40,7 +44,10 @@ class SearchProfileViewModel : ViewModel() {
         viewModelScope.launch {
             when (command) {
                 is SearchProfileCommands.Query -> { query.update { command.text.trim() } }
+                SearchProfileCommands.OpenRepoInBrowser -> {
+                    Log.d("SearchProfileViewModel", "Opened in browser")
                 }
+            }
         }
     }
 
@@ -49,6 +56,7 @@ class SearchProfileViewModel : ViewModel() {
 
 sealed interface SearchProfileCommands {
     data class Query(val text: String) : SearchProfileCommands
+    data object OpenRepoInBrowser : SearchProfileCommands
 }
 
 data class SearchProfileState(

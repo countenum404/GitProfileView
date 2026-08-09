@@ -90,6 +90,7 @@ fun SearchProfileView(
                                 Uri.parse("https://github.com/${profile.name}")
                             )
                             launcher.launch(intent)
+                            viewModel.processCommand(SearchProfileCommands.OpenRepoInBrowser)
                         }
                     )
                 }
