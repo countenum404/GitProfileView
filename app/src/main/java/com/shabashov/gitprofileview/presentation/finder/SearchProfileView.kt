@@ -8,6 +8,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -77,20 +78,20 @@ fun SearchProfileView(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        LazyColumn() {
-            state.profiles.forEach {
-                item {
+        LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            state.profiles.forEachIndexed { index, profile ->
+                item(key = index) {
                     ProfileCard(
                         modifier = Modifier.padding(start = 8.dp, end = 8.dp),
-                        profile = it,
+                        profile = profile,
                         onClick = {
-                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/${it.name}"))
+                            val intent = Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse("https://github.com/${profile.name}")
+                            )
                             launcher.launch(intent)
                         }
                     )
-                }
-                item {
-                    Spacer(modifier = Modifier.height(8.dp))
                 }
             }
         }
