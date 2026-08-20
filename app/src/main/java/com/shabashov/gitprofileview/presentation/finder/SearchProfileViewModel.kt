@@ -3,10 +3,8 @@ package com.shabashov.gitprofileview.presentation.finder
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shabashov.gitprofileview.data.repository.TestRepository
 import com.shabashov.gitprofileview.domain.Profile
 import com.shabashov.gitprofileview.domain.SearchProfileUseCase
-import com.shabashov.gitprofileview.domain.ShowRepositoryInBrowserUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.debounce
@@ -15,6 +13,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.milliseconds
 
 class SearchProfileViewModel : ViewModel() {
     private val searchProfileUseCase = SearchProfileUseCase()
@@ -29,7 +28,7 @@ class SearchProfileViewModel : ViewModel() {
     init {
         query.onEach { input ->
             _state.update { it.copy(query = input) }
-        }.debounce(500).flatMapLatest {
+        }.debounce(500.milliseconds).flatMapLatest {
             searchProfileUseCase(it)
         }.onEach { profiles ->
             _state.update { it.copy(profiles = profiles) }
