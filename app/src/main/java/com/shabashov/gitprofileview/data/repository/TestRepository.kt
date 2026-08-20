@@ -1,11 +1,10 @@
-package com.shabashov.gitprofileview.data
+package com.shabashov.gitprofileview.data.repository
 
 import com.shabashov.gitprofileview.domain.Profile
 import com.shabashov.gitprofileview.domain.ProfileRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.flowOf
 
 object TestRepository : ProfileRepository {
     fun getTestData(): Profile {
