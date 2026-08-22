@@ -86,24 +86,17 @@ fun SearchProfileView(
                 )
             }
             is SearchProfileScreenState.Found -> {
-                LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    currentState.profiles.forEachIndexed { index, profile ->
-                        item(key = index) {
-                            ProfileCard(
-                                modifier = Modifier.padding(start = 8.dp, end = 8.dp),
-                                profile = profile,
-                                onClick = {
-                                    val intent = Intent(
-                                        Intent.ACTION_VIEW,
-                                        "https://github.com/${profile.name}".toUri()
-                                    )
-                                    launcher.launch(intent)
-                                    viewModel.processCommand(SearchProfileCommands.OpenRepoInBrowser)
-                                }
-                            )
-                        }
+                ProfilesColumn(
+                    profiles = currentState.profiles,
+                    onClick = { profile ->
+                        val intent = Intent(
+                            Intent.ACTION_VIEW,
+                            "https://github.com/${profile.name}".toUri()
+                        )
+                        launcher.launch(intent)
+                        viewModel.processCommand(SearchProfileCommands.OpenRepoInBrowser)
                     }
-                }
+                )
             }
             is SearchProfileScreenState.Searching -> {
                 CenterText(
@@ -115,6 +108,28 @@ fun SearchProfileView(
                 CenterText(
                     modifier = Modifier.padding(start = 8.dp, end = 8.dp).weight(1f),
                     text = "Not found any profile with name ${currentState.query}"
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun ProfilesColumn(
+    modifier: Modifier = Modifier,
+    profiles: List<Profile>,
+    onClick: (profile: Profile) -> Unit
+) {
+    LazyColumn(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        profiles.forEachIndexed { index, profile ->
+            item(key = index) {
+                ProfileCard(
+                    modifier = Modifier.padding(start = 8.dp, end = 8.dp),
+                    profile = profile,
+                    onClick = { onClick(profile) }
                 )
             }
         }
