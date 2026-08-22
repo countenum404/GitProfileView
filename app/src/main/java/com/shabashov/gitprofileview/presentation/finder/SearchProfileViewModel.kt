@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shabashov.gitprofileview.domain.Profile
 import com.shabashov.gitprofileview.domain.SearchProfileUseCase
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.debounce
@@ -15,11 +17,12 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.milliseconds
 
+@OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
 class SearchProfileViewModel : ViewModel() {
     private val searchProfileUseCase = SearchProfileUseCase()
 
-    private val _state = MutableStateFlow<SearchProfileState>(
-        SearchProfileState("")
+    private val _state = MutableStateFlow<SearchProfileScreenState>(
+        SearchProfileScreenState.Initial
     )
     val state = _state.asStateFlow()
 
@@ -27,11 +30,22 @@ class SearchProfileViewModel : ViewModel() {
 
     init {
         query.onEach { input ->
-            _state.update { it.copy(query = input) }
-        }.debounce(500.milliseconds).flatMapLatest {
+            if (input.isNotBlank() && input.isNotEmpty()) {
+                _state.update { SearchProfileScreenState.Searching(query = input) }
+            } else {
+                _state.update { SearchProfileScreenState.Initial }
+            }
+        }.debounce{
+            500.milliseconds
+        }.flatMapLatest {
             searchProfileUseCase(it)
         }.onEach { profiles ->
-            _state.update { it.copy(profiles = profiles) }
+            _state.update {
+                SearchProfileScreenState.Found(
+                    query = _state.value.query,
+                    profiles = profiles
+                )
+            }
         }.launchIn(viewModelScope)
     }
 
@@ -48,6 +62,21 @@ class SearchProfileViewModel : ViewModel() {
 
 }
 
+sealed interface SearchProfileScreenState {
+    data object Initial: SearchProfileScreenState {
+        override val query: String
+            get() = ""
+    }
+
+    data class Found(
+        override val query: String,
+        val profiles: List<Profile>
+    ) : SearchProfileScreenState
+
+    data class Searching(override val query: String) : SearchProfileScreenState
+
+    val query: String
+}
 
 sealed interface SearchProfileCommands {
     data class Query(val text: String) : SearchProfileCommands

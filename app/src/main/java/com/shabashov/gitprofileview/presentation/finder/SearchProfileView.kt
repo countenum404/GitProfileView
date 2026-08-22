@@ -37,6 +37,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -44,6 +45,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.shabashov.gitprofileview.domain.Profile
 import com.shabashov.gitprofileview.presentation.ui.theme.JetBrainsFontFamily
+import androidx.core.net.toUri
 
 @Preview
 @Composable
@@ -58,6 +60,7 @@ fun SearchProfileView(
     }
 
     val state by viewModel.state.collectAsState()
+    val currentState = state
 
     Column(modifier = modifier) {
         SearchField(
@@ -78,28 +81,60 @@ fun SearchProfileView(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            state.profiles.forEachIndexed { index, profile ->
-                item(key = index) {
-                    ProfileCard(
-                        modifier = Modifier.padding(start = 8.dp, end = 8.dp),
-                        profile = profile,
-                        onClick = {
-                            val intent = Intent(
-                                Intent.ACTION_VIEW,
-                                Uri.parse("https://github.com/${profile.name}")
+        when (currentState) {
+            SearchProfileScreenState.Initial -> {
+                CenterText(
+                    modifier = Modifier.padding(start = 8.dp, end = 8.dp).weight(1f),
+                    text = "GitHub profiles searching tool"
+                )
+            }
+            is SearchProfileScreenState.Found -> {
+                LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    currentState.profiles.forEachIndexed { index, profile ->
+                        item(key = index) {
+                            ProfileCard(
+                                modifier = Modifier.padding(start = 8.dp, end = 8.dp),
+                                profile = profile,
+                                onClick = {
+                                    val intent = Intent(
+                                        Intent.ACTION_VIEW,
+                                        "https://github.com/${profile.name}".toUri()
+                                    )
+                                    launcher.launch(intent)
+                                    viewModel.processCommand(SearchProfileCommands.OpenRepoInBrowser)
+                                }
                             )
-                            launcher.launch(intent)
-                            viewModel.processCommand(SearchProfileCommands.OpenRepoInBrowser)
                         }
-                    )
+                    }
                 }
+            }
+            is SearchProfileScreenState.Searching -> {
+                CenterText(
+                    modifier = Modifier.padding(start = 8.dp, end = 8.dp).weight(1f),
+                    text = "Loading..."
+                )
             }
         }
     }
-
-
 }
+
+@Composable
+fun CenterText(
+    modifier: Modifier = Modifier,
+    text: String
+) {
+    Box(
+        modifier = modifier.fillMaxWidth(),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = text,
+            fontFamily = JetBrainsFontFamily,
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
 
 @Composable
 fun SearchField(
@@ -129,7 +164,8 @@ fun SearchField(
             focusedContainerColor = MaterialTheme.colorScheme.surface,
             unfocusedContainerColor = MaterialTheme.colorScheme.surface,
             focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent
+            unfocusedIndicatorColor = Color.Transparent,
+            cursorColor = Color.Transparent,
         ),
     )
 }
