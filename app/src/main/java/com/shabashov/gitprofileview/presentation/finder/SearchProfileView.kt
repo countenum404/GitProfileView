@@ -111,6 +111,12 @@ fun SearchProfileView(
                     text = "Loading..."
                 )
             }
+            is SearchProfileScreenState.NotFound -> {
+                CenterText(
+                    modifier = Modifier.padding(start = 8.dp, end = 8.dp).weight(1f),
+                    text = "Not found any profile with name ${currentState.query}"
+                )
+            }
         }
     }
 }

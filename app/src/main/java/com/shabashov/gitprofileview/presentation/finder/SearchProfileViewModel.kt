@@ -40,11 +40,15 @@ class SearchProfileViewModel : ViewModel() {
         }.flatMapLatest {
             searchProfileUseCase(it)
         }.onEach { profiles ->
-            _state.update {
-                SearchProfileScreenState.Found(
-                    query = _state.value.query,
-                    profiles = profiles
-                )
+            if (profiles.isEmpty()) {
+                _state.update { SearchProfileScreenState.NotFound(_state.value.query) }
+            } else {
+                _state.update {
+                    SearchProfileScreenState.Found(
+                        query = _state.value.query,
+                        profiles = profiles
+                    )
+                }
             }
         }.launchIn(viewModelScope)
     }
@@ -74,6 +78,8 @@ sealed interface SearchProfileScreenState {
     ) : SearchProfileScreenState
 
     data class Searching(override val query: String) : SearchProfileScreenState
+
+    data class NotFound(override val query: String) : SearchProfileScreenState
 
     val query: String
 }
