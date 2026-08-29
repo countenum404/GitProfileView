@@ -10,7 +10,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import com.shabashov.gitprofileview.presentation.finder.SearchProfileView
 import com.shabashov.gitprofileview.presentation.ui.theme.GitProfileViewTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

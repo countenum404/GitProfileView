@@ -4,10 +4,9 @@ import android.util.Log
 import com.shabashov.gitprofileview.data.datasource.mappers.emptyProfile
 import com.shabashov.gitprofileview.data.datasource.mappers.toProfile
 import com.shabashov.gitprofileview.data.datasource.network.GithubApiService
-import com.shabashov.gitprofileview.data.datasource.network.RetrofitClient
-import com.shabashov.gitprofileview.data.datasource.network.User
 import com.shabashov.gitprofileview.domain.Profile
 import com.shabashov.gitprofileview.domain.ProfileRepository
+import jakarta.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
@@ -17,8 +16,8 @@ import kotlinx.coroutines.withContext
 
 //   countenum404
 
-class GithubRepository(
-    val apiService: GithubApiService = RetrofitClient.retrofit.create(GithubApiService::class.java)
+class GithubRepository @Inject constructor(
+    val apiService: GithubApiService
 ): ProfileRepository {
     companion object {
         private const val TAG = "GithubRepository"

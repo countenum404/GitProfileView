@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shabashov.gitprofileview.domain.Profile
 import com.shabashov.gitprofileview.domain.SearchProfileUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import jakarta.inject.Inject
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,9 +19,11 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.milliseconds
 
+@HiltViewModel
 @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
-class SearchProfileViewModel : ViewModel() {
-    private val searchProfileUseCase = SearchProfileUseCase()
+class SearchProfileViewModel @Inject constructor(
+    private val searchProfileUseCase: SearchProfileUseCase
+) : ViewModel() {
 
     private val _state = MutableStateFlow<SearchProfileScreenState>(
         SearchProfileScreenState.Initial

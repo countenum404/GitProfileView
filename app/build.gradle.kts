@@ -2,18 +2,19 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.hilt.android)
+    alias(libs.plugins.ksp)
 }
 
 configure<com.android.build.api.dsl.ApplicationExtension> {
     namespace = "com.shabashov.gitprofileview"
-    compileSdk {
-        version = release(36)
-    }
+
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.shabashov.gitprofileview"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
 
@@ -60,4 +61,8 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.kotlinx.serialization)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.compose.material.icons.extended)
+    ksp(libs.hilt.android.compiler)
 }
