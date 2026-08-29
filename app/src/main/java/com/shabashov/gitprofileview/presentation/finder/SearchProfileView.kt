@@ -32,6 +32,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -197,12 +198,13 @@ fun ProfileCard(
     Box(
         modifier = modifier
             .fillMaxWidth()
+            .clip(shape = RoundedCornerShape(8.dp))
+            .background(color = MaterialTheme.colorScheme.surface,)
             .border(
                 shape = RoundedCornerShape(8.dp),
-                width = 0.dp,
+                width = 1.dp,
                 color = MaterialTheme.colorScheme.tertiary
             )
-            .background(color = MaterialTheme.colorScheme.surface)
             .clickable(onClick = onClick)
     ) {
         Column(
