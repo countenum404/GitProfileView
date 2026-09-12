@@ -55,7 +55,11 @@ fun NavGraph() {
 
         composable(Screen.ProfilesHistoryScreen.route) {
             val viewModel: HistoryViewModel = hiltViewModel()
-            HistoryView(viewModel = viewModel)
+            GitProfileViewTheme {
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    HistoryView(modifier = Modifier.padding(innerPadding), viewModel = viewModel)
+                }
+            }
         }
     }
 }

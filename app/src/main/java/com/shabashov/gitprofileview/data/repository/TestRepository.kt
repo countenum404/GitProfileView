@@ -1,8 +1,9 @@
 package com.shabashov.gitprofileview.data.repository
 
 import com.shabashov.gitprofileview.domain.Profile
-import com.shabashov.gitprofileview.domain.ProfileHistoryRepository
+import com.shabashov.gitprofileview.domain.VisitedProfilesRepository
 import com.shabashov.gitprofileview.domain.ProfileRepository
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -25,7 +26,7 @@ object TestRepository : ProfileRepository {
     }
 }
 
-object TestViewedProfilesRepository : ProfileHistoryRepository {
+object TestViewedProfilesRepository : VisitedProfilesRepository {
 
     private val savedProfiles = mutableListOf(
         Profile(
@@ -45,6 +46,8 @@ object TestViewedProfilesRepository : ProfileHistoryRepository {
     )
 
     override suspend fun getAllProfiles(): Flow<List<Profile>> {
+        delay(1500)
+        throw Exception("test")
         return flowOf(savedProfiles)
     }
 
