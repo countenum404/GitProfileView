@@ -89,7 +89,7 @@ fun SearchProfileView(
                             "https://github.com/${profile.name}".toUri()
                         )
                         launcher.launch(intent)
-                        viewModel.processCommand(SearchProfileCommands.OpenRepoInBrowser)
+                        viewModel.processCommand(SearchProfileCommands.OpenRepoInBrowser(profile))
                     }
                 )
             }

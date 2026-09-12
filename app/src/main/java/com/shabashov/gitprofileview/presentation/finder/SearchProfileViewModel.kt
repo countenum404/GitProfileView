@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shabashov.gitprofileview.domain.Profile
+import com.shabashov.gitprofileview.domain.SaveProfileAsVisitedUseCase
 import com.shabashov.gitprofileview.domain.SearchProfileUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
@@ -22,7 +23,8 @@ import kotlin.time.Duration.Companion.milliseconds
 @HiltViewModel
 @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
 class SearchProfileViewModel @Inject constructor(
-    private val searchProfileUseCase: SearchProfileUseCase
+    private val searchProfileUseCase: SearchProfileUseCase,
+    private val saveProfileAsVisitedUseCase: SaveProfileAsVisitedUseCase
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<SearchProfileScreenState>(
@@ -61,7 +63,8 @@ class SearchProfileViewModel @Inject constructor(
         viewModelScope.launch {
             when (command) {
                 is SearchProfileCommands.Query -> { query.update { command.text.trim() } }
-                SearchProfileCommands.OpenRepoInBrowser -> {
+                is SearchProfileCommands.OpenRepoInBrowser -> {
+                    saveProfileAsVisitedUseCase(command.profile)
                     Log.d("SearchProfileViewModel", "Opened in browser")
                 }
             }
@@ -90,7 +93,7 @@ sealed interface SearchProfileScreenState {
 
 sealed interface SearchProfileCommands {
     data class Query(val text: String) : SearchProfileCommands
-    data object OpenRepoInBrowser : SearchProfileCommands
+    data class OpenRepoInBrowser(val profile: Profile) : SearchProfileCommands
 }
 
 data class SearchProfileState(
