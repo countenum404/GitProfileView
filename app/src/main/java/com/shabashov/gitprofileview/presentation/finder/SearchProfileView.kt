@@ -66,13 +66,6 @@ fun SearchProfileView(
         )
         Spacer(modifier = Modifier.height(8.dp))
 
-        SubTitle(
-            modifier = Modifier.padding(start = 8.dp),
-            text = "Found accounts"
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
-
         when (currentState) {
             SearchProfileScreenState.Initial -> {
                 CenterText(
@@ -81,6 +74,14 @@ fun SearchProfileView(
                 )
             }
             is SearchProfileScreenState.Found -> {
+
+                SubTitle(
+                    modifier = Modifier.padding(start = 8.dp),
+                    text = "Found accounts"
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
                 ProfilesColumn(
                     profiles = currentState.profiles,
                     onClick = { profile ->
