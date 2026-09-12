@@ -1,7 +1,7 @@
-# The GitProfileView application
+# The GitProfileView
 
 ### About
-The application allows you to search GitHub profiles and their repositories
+The GitProfileView is an Android 📱 application allows you to search GitHub profiles and their repositories
 
 ### Key features:
 - A search page with a search bar (easy to use, no buttons, there are debounce tactic to handle user search request)
