@@ -16,7 +16,7 @@ import kotlinx.coroutines.withContext
 
 //   countenum404
 
-class GithubRepository @Inject constructor(
+class  GithubRepository @Inject constructor(
     val apiService: GithubApiService
 ): ProfileRepository {
     companion object {
