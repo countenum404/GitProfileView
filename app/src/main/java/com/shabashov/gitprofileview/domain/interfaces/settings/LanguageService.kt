@@ -1,4 +1,4 @@
-package com.shabashov.gitprofileview.domain
+package com.shabashov.gitprofileview.domain.interfaces.settings
 
 import com.shabashov.gitprofileview.domain.entity.AppLanguage
 

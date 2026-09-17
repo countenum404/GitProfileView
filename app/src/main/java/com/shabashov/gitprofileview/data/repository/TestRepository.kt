@@ -1,8 +1,8 @@
 package com.shabashov.gitprofileview.data.repository
 
 import com.shabashov.gitprofileview.domain.entity.Profile
-import com.shabashov.gitprofileview.domain.VisitedProfilesRepository
-import com.shabashov.gitprofileview.domain.ProfileRepository
+import com.shabashov.gitprofileview.domain.interfaces.settings.VisitedProfilesRepository
+import com.shabashov.gitprofileview.domain.interfaces.profile.ProfileRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

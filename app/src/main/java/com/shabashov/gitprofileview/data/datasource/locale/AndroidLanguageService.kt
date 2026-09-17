@@ -8,7 +8,7 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
-import com.shabashov.gitprofileview.domain.LanguageService
+import com.shabashov.gitprofileview.domain.interfaces.settings.LanguageService
 import com.shabashov.gitprofileview.domain.entity.AppLanguage
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.util.Locale

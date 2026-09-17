@@ -1,8 +1,7 @@
 package com.shabashov.gitprofileview.domain.usecase.settings
 
-import android.util.Log
-import com.shabashov.gitprofileview.domain.LanguageService
-import com.shabashov.gitprofileview.domain.SettingsRepository
+import com.shabashov.gitprofileview.domain.interfaces.settings.LanguageService
+import com.shabashov.gitprofileview.domain.interfaces.settings.SettingsRepository
 import com.shabashov.gitprofileview.domain.entity.AppLanguage
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject

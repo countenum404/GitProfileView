@@ -4,7 +4,7 @@ import com.shabashov.gitprofileview.data.datasource.database.VisitedProfileDao
 import com.shabashov.gitprofileview.data.datasource.mappers.toProfileEntity
 import com.shabashov.gitprofileview.data.datasource.mappers.toProfiles
 import com.shabashov.gitprofileview.domain.entity.Profile
-import com.shabashov.gitprofileview.domain.VisitedProfilesRepository
+import com.shabashov.gitprofileview.domain.interfaces.settings.VisitedProfilesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject

@@ -13,10 +13,10 @@ import com.shabashov.gitprofileview.data.datasource.network.RetrofitClient
 import com.shabashov.gitprofileview.data.repository.GithubRepository
 import com.shabashov.gitprofileview.data.repository.SettingsRepositoryImpl
 import com.shabashov.gitprofileview.data.repository.VisitedProfilesRepositoryImpl
-import com.shabashov.gitprofileview.domain.LanguageService
-import com.shabashov.gitprofileview.domain.ProfileRepository
-import com.shabashov.gitprofileview.domain.SettingsRepository
-import com.shabashov.gitprofileview.domain.VisitedProfilesRepository
+import com.shabashov.gitprofileview.domain.interfaces.settings.LanguageService
+import com.shabashov.gitprofileview.domain.interfaces.profile.ProfileRepository
+import com.shabashov.gitprofileview.domain.interfaces.settings.SettingsRepository
+import com.shabashov.gitprofileview.domain.interfaces.settings.VisitedProfilesRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
