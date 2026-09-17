@@ -44,6 +44,7 @@ import com.shabashov.gitprofileview.domain.entity.Theme
 import com.shabashov.gitprofileview.presentation.ui.components.CenterText
 import com.shabashov.gitprofileview.presentation.ui.components.SubTitle
 import com.shabashov.gitprofileview.presentation.ui.components.Title
+import com.shabashov.gitprofileview.presentation.ui.theme.GitProfileViewTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

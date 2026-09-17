@@ -20,44 +20,38 @@ fun NavGraph() {
     NavHost(navController = navController, startDestination = Screen.SearchScreen.route) {
         composable(Screen.SearchScreen.route) {
             val viewModel: SearchProfileViewModel = hiltViewModel()
-            GitProfileViewTheme {
-                SearchProfileView(
-                    modifier = Modifier,
-                    viewModel = viewModel,
-                    onFloatingActionButtonClick = {
-                        navController.navigate(Screen.ProfilesHistoryScreen.route) {
-                            launchSingleTop = true
-                            restoreState = true
-                        }
-                    },
-                    onSettingsClicked = {
-                        navController.navigate(Screen.SettingsScreen.route)  {
-                            launchSingleTop = true
-                            restoreState = true
-                        }
+            SearchProfileView(
+                modifier = Modifier,
+                viewModel = viewModel,
+                onFloatingActionButtonClick = {
+                    navController.navigate(Screen.ProfilesHistoryScreen.route) {
+                        launchSingleTop = true
+                        restoreState = true
                     }
-                )
-            }
+                },
+                onSettingsClicked = {
+                    navController.navigate(Screen.SettingsScreen.route)  {
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                }
+            )
         }
 
         composable(Screen.ProfilesHistoryScreen.route) {
             val viewModel: HistoryViewModel = hiltViewModel()
-            GitProfileViewTheme {
-                HistoryView(
-                    modifier = Modifier,
-                    viewModel = viewModel
-                )
-            }
+            HistoryView(
+                modifier = Modifier,
+                viewModel = viewModel
+            )
         }
 
         composable(Screen.SettingsScreen.route) {
             val viewModel: SettingsViewModel = hiltViewModel()
-            GitProfileViewTheme {
-                SettingsView(
-                    modifier = Modifier,
-                    viewModel = viewModel
-                )
-            }
+            SettingsView(
+                modifier = Modifier,
+                viewModel = viewModel
+            )
         }
     }
 }
