@@ -32,9 +32,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import com.shabashov.gitprofileview.R
 import com.shabashov.gitprofileview.presentation.ui.components.CenterText
 import com.shabashov.gitprofileview.presentation.ui.components.ProfilesColumn
 import com.shabashov.gitprofileview.presentation.ui.components.SubTitle
@@ -65,7 +67,7 @@ fun SearchProfileView(
                 title = {
                     Title(
                         modifier = Modifier,
-                        text = "Search"
+                        text = stringResource(R.string.search)
                     )
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -118,14 +120,14 @@ fun SearchProfileView(
                         modifier = Modifier
                             .padding(start = 8.dp, end = 8.dp)
                             .weight(1f),
-                        text = "GitHub profiles searching tool"
+                        text = stringResource(R.string.github_profiles_searching_tool)
                     )
                 }
                 is SearchProfileScreenState.Found -> {
 
                     SubTitle(
                         modifier = Modifier.padding(start = 8.dp),
-                        text = "Found accounts"
+                        text = stringResource(R.string.found_accounts)
                     )
 
                     Spacer(modifier = Modifier.height(8.dp))
@@ -156,7 +158,10 @@ fun SearchProfileView(
                         modifier = Modifier
                             .padding(start = 8.dp, end = 8.dp)
                             .weight(1f),
-                        text = "Not found any profile with name ${currentState.query}"
+                        text = stringResource(
+                            R.string.not_found_any_profile_with_name,
+                            currentState.query
+                        )
                     )
                 }
             }
@@ -179,7 +184,7 @@ fun SearchField(
         shape = RoundedCornerShape(8.dp),
         placeholder = {
             Text(
-                "Type to search a profiles",
+                stringResource(R.string.type_to_search_a_profiles),
                 fontFamily = JetBrainsFontFamily,
             )
         },

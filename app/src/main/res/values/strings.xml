@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">GitProfileView</string>
+    <string name="app_name" translatable="false">GitProfileView</string>
+    <string name="search">Search</string>
+    <string name="type_to_search_a_profiles">Type to search a profiles</string>
+    <string name="github_profiles_searching_tool">GitHub profiles searching tool</string>
+    <string name="visited_profiles">Visited profiles</string>
+    <string name="loading">Loading...</string>
+    <string name="found_accounts">Found accounts</string>
+    <string name="not_found_any_profile_with_name">Not found any profile with name %1$s</string>
+    <string name="settings">Settings</string>
+    <string name="language">Language</string>
+    <string name="select">Select %1$s</string>
 </resources>

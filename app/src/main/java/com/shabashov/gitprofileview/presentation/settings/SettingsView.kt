@@ -44,9 +44,11 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.toLowerCase
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import com.shabashov.gitprofileview.R
 import com.shabashov.gitprofileview.domain.entity.AppLanguage
 import com.shabashov.gitprofileview.presentation.navigation.Screen
 import com.shabashov.gitprofileview.presentation.ui.components.CenterText
@@ -70,7 +72,7 @@ fun SettingsView(
                 title = {
                     Title(
                         modifier = Modifier,
-                        text = "Settings"
+                        text = stringResource(R.string.settings)
                     )
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -85,7 +87,7 @@ fun SettingsView(
             when (val currentState = state) {
                 SettingsScreenState.Loading -> CenterText(
                     modifier = Modifier,
-                    text = "Loading..."
+                    text = stringResource(R.string.loading)
                 )
                 is SettingsScreenState.SettingsLoaded -> {
                     val settings = currentState.settings
@@ -94,7 +96,7 @@ fun SettingsView(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 16.dp),
-                        settingName = "Language",
+                        settingName = stringResource(R.string.language),
                         settings = AppLanguage.entries.map { it.name }.toList(),
                         icon = Icons.Default.Language,
                         currentSelection = settings.language.name,
@@ -148,7 +150,7 @@ fun SettingsBottomSheet(
         ) {
             SubTitle(
                 modifier = Modifier.padding(8.dp),
-                text = "Select ${settingName.lowercase()}"
+                text = stringResource(R.string.select, settingName.lowercase())
             )
             LazyColumn(
                 modifier = Modifier
@@ -162,7 +164,8 @@ fun SettingsBottomSheet(
                         modifier = Modifier
                             .background(
                                 color = MaterialTheme.colorScheme.background
-                            ).clickable {
+                            )
+                            .clickable {
                                 onItemClick(setting)
                                 showBottomSheet = false
                             },

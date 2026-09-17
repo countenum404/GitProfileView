@@ -13,8 +13,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import com.shabashov.gitprofileview.R
 import com.shabashov.gitprofileview.presentation.ui.components.CenterText
 import com.shabashov.gitprofileview.presentation.ui.components.ProfilesColumn
 import com.shabashov.gitprofileview.presentation.ui.components.Title
@@ -33,7 +35,7 @@ fun HistoryView(
                 title = {
                     Title(
                         modifier = Modifier,
-                        text = "Visited profiles"
+                        text = stringResource(R.string.visited_profiles)
                     )
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -43,7 +45,9 @@ fun HistoryView(
         }
     ) { innerPadding ->
         Column(
-            modifier = modifier.fillMaxSize().padding(innerPadding)
+            modifier = modifier
+                .fillMaxSize()
+                .padding(innerPadding)
         ) {
             when (val currentState = state) {
                 HistoryScreenState.ErrorState -> {
