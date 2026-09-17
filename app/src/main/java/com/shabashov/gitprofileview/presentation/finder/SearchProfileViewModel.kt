@@ -3,9 +3,9 @@ package com.shabashov.gitprofileview.presentation.finder
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shabashov.gitprofileview.domain.Profile
-import com.shabashov.gitprofileview.domain.SaveProfileAsVisitedUseCase
-import com.shabashov.gitprofileview.domain.SearchProfileUseCase
+import com.shabashov.gitprofileview.domain.entity.Profile
+import com.shabashov.gitprofileview.domain.usecase.profile.SaveProfileAsVisitedUseCase
+import com.shabashov.gitprofileview.domain.usecase.profile.SearchProfileUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.ExperimentalCoroutinesApi

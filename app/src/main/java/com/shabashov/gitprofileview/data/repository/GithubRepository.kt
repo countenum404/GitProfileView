@@ -4,7 +4,7 @@ import android.util.Log
 import com.shabashov.gitprofileview.data.datasource.mappers.emptyProfile
 import com.shabashov.gitprofileview.data.datasource.mappers.toProfile
 import com.shabashov.gitprofileview.data.datasource.network.GithubApiService
-import com.shabashov.gitprofileview.domain.Profile
+import com.shabashov.gitprofileview.domain.entity.Profile
 import com.shabashov.gitprofileview.domain.ProfileRepository
 import jakarta.inject.Inject
 import kotlinx.coroutines.Dispatchers

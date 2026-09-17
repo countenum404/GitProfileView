@@ -2,8 +2,8 @@ package com.shabashov.gitprofileview.presentation.history
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shabashov.gitprofileview.domain.GetAllViewedProfilesUseCase
-import com.shabashov.gitprofileview.domain.Profile
+import com.shabashov.gitprofileview.domain.usecase.profile.GetAllViewedProfilesUseCase
+import com.shabashov.gitprofileview.domain.entity.Profile
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

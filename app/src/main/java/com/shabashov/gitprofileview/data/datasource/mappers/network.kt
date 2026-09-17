@@ -1,7 +1,7 @@
 package com.shabashov.gitprofileview.data.datasource.mappers
 
 import com.shabashov.gitprofileview.data.datasource.network.User
-import com.shabashov.gitprofileview.domain.Profile
+import com.shabashov.gitprofileview.domain.entity.Profile
 
 
 fun User.toProfile(): Profile = Profile(
