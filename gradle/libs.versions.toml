@@ -1,6 +1,7 @@
 [versions]
 agp = "9.2.1"
 converterKotlinxSerialization = "3.0.0"
+datastorePreferences = "1.2.1"
 hiltAndroid = "2.60.1"
 hiltNavigationCompose = "1.4.0"
 kotlin = "2.4.10"
@@ -17,9 +18,11 @@ retrofit = "3.0.0"
 kotlinxSerializationJson = "1.11.0"
 ksp = "2.3.10"
 room3Runtime = "3.0.3"
+appcompat = "1.8.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 androidx-hilt-lifecycle-viewmodel-compose = { module = "androidx.hilt:hilt-lifecycle-viewmodel-compose", version.ref = "hiltNavigationCompose" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 androidx-room3-compiler = { module = "androidx.room3:room3-compiler", version.ref = "room3Runtime" }
@@ -47,6 +50,7 @@ androidx-lifecycle-viewmodel-compose = {  module = "androidx.lifecycle:lifecycle
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

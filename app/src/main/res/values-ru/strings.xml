@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search">Поиск</string>
+    <string name="type_to_search_a_profiles">Введите запрос для поиска</string>
+    <string name="github_profiles_searching_tool">Приложение для поиска профилей на GitHub</string>
+    <string name="visited_profiles">Просмотренные профили</string>
+    <string name="loading">Загрузка...</string>
+    <string name="found_accounts">Найденные аккаунты</string>
+    <string name="not_found_any_profile_with_name">Не найдено аккаунтов с именем %1$s</string>
+    <string name="settings">Настройки</string>
+    <string name="language">Язык</string>
+    <string name="select">Выберите %1$s</string>
+    <string name="theme">Тема</string>
+</resources>

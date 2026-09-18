@@ -1,4 +1,4 @@
-package com.shabashov.gitprofileview.domain
+package com.shabashov.gitprofileview.domain.entity
 
 data class Profile(
     val name: String,

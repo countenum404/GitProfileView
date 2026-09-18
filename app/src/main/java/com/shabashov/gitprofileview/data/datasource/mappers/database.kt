@@ -1,7 +1,7 @@
 package com.shabashov.gitprofileview.data.datasource.mappers
 
 import com.shabashov.gitprofileview.data.datasource.database.ProfileEntity
-import com.shabashov.gitprofileview.domain.Profile
+import com.shabashov.gitprofileview.domain.entity.Profile
 import java.util.UUID
 
 
