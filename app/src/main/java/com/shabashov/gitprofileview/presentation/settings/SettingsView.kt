@@ -8,17 +8,21 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BeachAccess
 import androidx.compose.material.icons.filled.Language
+import androidx.compose.material.icons.filled.Title
+import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.ModalBottomSheetDefaults
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Scaffold
@@ -44,6 +48,7 @@ import com.shabashov.gitprofileview.domain.entity.Theme
 import com.shabashov.gitprofileview.presentation.ui.components.CenterText
 import com.shabashov.gitprofileview.presentation.ui.components.SubTitle
 import com.shabashov.gitprofileview.presentation.ui.components.Title
+import com.shabashov.gitprofileview.presentation.ui.theme.GitProfileViewIcons
 import com.shabashov.gitprofileview.presentation.ui.theme.GitProfileViewTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -117,6 +122,22 @@ fun SettingsView(
                                 )
                             },
                         )
+
+                        // Select API provider
+                        SettingsBottomSheet(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp),
+                            settingName = "Version control system",
+                            settings = Theme.entries.map { it.name }.toList(),
+                            icon = GitProfileViewIcons.GitHub,
+                            currentSelection = settings.theme.name,
+                            onItemClick = { theme ->
+                                viewModel.processCommand(
+                                    SettingsScreenCommands.ChangeTheme(Theme.valueOf(theme))
+                                )
+                            },
+                        )
                     }
                 }
             }
@@ -145,6 +166,7 @@ fun SettingsBottomSheet(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Icon(
+            modifier = Modifier.size(24.dp),
             imageVector = icon,
             contentDescription = "Icon"
         )
@@ -175,7 +197,7 @@ fun SettingsBottomSheet(
                     ListItem(
                         modifier = Modifier
                             .background(
-                                color = MaterialTheme.colorScheme.background
+                                color = BottomSheetDefaults.ContainerColor
                             )
                             .clickable {
                                 onItemClick(setting)
@@ -184,7 +206,7 @@ fun SettingsBottomSheet(
                         headlineContent = {
                             Text(
                                 modifier = Modifier.background(
-                                    color = MaterialTheme.colorScheme.background
+                                    color = BottomSheetDefaults.ContainerColor
                                 ),
                                 text = setting
                             )
@@ -192,7 +214,7 @@ fun SettingsBottomSheet(
                         leadingContent = {
                             RadioButton(
                                 modifier = Modifier.background(
-                                    color = MaterialTheme.colorScheme.background
+                                    color = BottomSheetDefaults.ContainerColor
                                 ),
                                 selected = isSelected,
                                 onClick = {
@@ -204,7 +226,7 @@ fun SettingsBottomSheet(
                             )
                         },
                         colors = ListItemDefaults.colors().copy(
-                            containerColor = MaterialTheme.colorScheme.background
+                            containerColor = BottomSheetDefaults.ContainerColor
                         )
                     )
                 }
